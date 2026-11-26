@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BRUTA</title>
+    <!-- isotipo de BRUTA como ícono de la pestaña -->
+    <link rel="icon" type="image/svg+xml" href="assets/logos/bruta-isotipo-negro.svg" />
+    <!-- p5.js 2.3.2 desde el CDN (jsDelivr) -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@2.3.2/lib/p5.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <!-- solo en celular: la B a la izquierda y el botón que abre el menú -->
+        <a class="logo logo-celular" href="#portada">
+          <img src="assets/logos/bruta-isotipo-blanco.svg" alt="BRUTA" width="32" />
+        </a>
+        <!-- en computadora: una sola lista de 5 columnas iguales (botones equidistantes y la B en el medio).
+             En celular: panel a pantalla completa que se abre con el botón MENÚ -->
+        <ul class="nav-lista" id="menu">
+          <li><a class="boton micro" href="#texto">CONCEPTO</a></li>
+          <li><a class="boton micro" href="#titulares">ARCHIVO</a></li>
+          <li class="nav-logo">
+            <a class="logo" href="#portada">
+              <img src="assets/logos/bruta-isotipo-blanco.svg" alt="BRUTA" width="40" />
+            </a>
+          </li>
+          <li><a class="boton micro" href="#horizontal">TIENDA</a></li>
+          <li><a class="boton micro" href="#contacto">PREGUNTAS</a></li>
+        </ul>
+        <button class="boton micro boton-menu" id="boton-menu" type="button" aria-controls="menu" aria-expanded="false">MENÚ</button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Canvas 1 (piedra): fijo detrás de todas las secciones -->
+      <div id="lienzo-piedra"></div>
+
+      <!-- 01 Portada (clara): la piedra flota en el centro · textura de cemento -->
+      <section id="portada">
+        <div class="textura textura-cemento"></div>
+        <p class="micro numero-seccion">N° 01</p>
+        <span class="registro"><i></i></span>
+        <p class="micro-s texto-borde">CONCRETO Y METAL — BUENOS AIRES</p>
+
+        <div class="portada-texto">
+          <h1 class="titular-xl">
+            EN BRUTO
+            <span class="script">concreto</span>
+          </h1>
+          <p class="texto">Objetos, cuadros y esculturas de concreto y metal.</p>
+        </div>
+        <div class="portada-botones">
+          <a class="boton micro" href="#horizontal">VER PIEZAS</a>
+          <a class="boton micro" href="#piezas">PROCESO</a>
+        </div>
+      </section>
+
+      <!-- 02 Texto (oscura): la piedra entera se va a la izquierda · negro liso -->
+      <section id="texto">
+        <p class="micro numero-seccion">N° 02</p>
+        <div class="columna-derecha">
+          <h2 class="titular-l">A LA VISTA</h2>
+          <!-- gesto a mano: pincelada roja como subrayado -->
+          <img class="pincelada" src="assets/gestos/bruta-gesto-pincelada-seca.png" alt="" />
+          <p class="texto-l">
+            Cada pieza muestra cómo está hecha: la marca del molde, el poro, la arista, la soldadura, el
+            corte. No se pule de más ni se tapa. El material en bruto es la terminación.
+          </p>
+        </div>
+      </section>
+
+      <!-- 03 Titulares (clara): la piedra se abre; los cuatro titulares quedan a la vista
+           y crece el que corresponde al scroll · afiche con trama -->
+      <section id="titulares">
+        <!-- contenedor del alto de la sección: adentro, la textura queda quieta en pantalla -->
+        <div class="capa-textura"><div class="textura textura-afiche"></div></div>
+        <!-- la lista queda fija en pantalla mientras dura la sección -->
+        <div class="titulares-fijo">
+          <p class="micro numero-seccion">N° 03</p>
+          <ol class="lista-titulares">
+            <li class="titular activo">
+              <span class="sello"><img src="assets/gestos/bruta-gesto-circulo.png" alt="" /><span class="sello-numero">01</span></span>
+              <div>
+                <h2 class="titular-l">MATERIAL</h2>
+                <p class="resaltado">CONCRETO Y METAL. EL PORO Y LA MARCA DEL MOLDE SE QUEDAN.</p>
+              </div>
+            </li>
+            <li class="titular">
+              <span class="sello"><img src="assets/gestos/bruta-gesto-circulo.png" alt="" /><span class="sello-numero">02</span></span>
+              <div>
+                <h2 class="titular-l">CONSTRUCCIÓN</h2>
+                <p class="resaltado">UNIONES, SOLDADURAS Y CORTES. NADA SE ESCONDE.</p>
+              </div>
+            </li>
+            <li class="titular">
+              <span class="sello"><img src="assets/gestos/bruta-gesto-circulo.png" alt="" /><span class="sello-numero">03</span></span>
+              <div>
+                <h2 class="titular-l">GEOMETRÍA</h2>
+                <p class="resaltado">CRUDO EN LA SUPERFICIE, EXACTO EN LA FORMA.</p>
+              </div>
+            </li>
+            <li class="titular">
+              <span class="sello"><img src="assets/gestos/bruta-gesto-circulo.png" alt="" /><span class="sello-numero">04</span></span>
+              <div>
+                <h2 class="titular-l">CALLE</h2>
+                <p class="resaltado">LA CIUDAD COMO REFERENCIA: MEDIANERAS, MUROS Y ALAMBRADO.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 04 Horizontal (oscura): la piedra se dispersa y los productos se deslizan de costado · grilla 3D en cubos.js -->
+      <section id="horizontal">
+        <div id="horizontal-interior">
+          <!-- Canvas 2 (cubos) -->
+          <div id="lienzo-cubos"></div>
+          <!-- línea de construcción a la altura de los cubos -->
+          <div class="linea-construccion"><span class="micro-s">COLECCIÓN</span></div>
+          <p class="micro numero-seccion">N° 04</p>
+          <div id="pista">
+            <article class="panel">
+              <span class="numero-rojo">01</span>
+              <h2 class="titular-l">ORGANIZADOR</h2>
+              <p class="texto">Concreto para el escritorio. Cada cosa en su lugar, a la vista.</p>
+            </article>
+            <article class="panel">
+              <span class="numero-rojo">02</span>
+              <h2 class="titular-l">PORTALLAVES</h2>
+              <p class="texto">Para la pared de la entrada. Concreto con ganchos de metal soldados.</p>
+            </article>
+            <article class="panel">
+              <span class="numero-rojo">03</span>
+              <h2 class="titular-l">CUADROS</h2>
+              <p class="texto">Placas de concreto para colgar. La textura es la imagen.</p>
+            </article>
+            <article class="panel">
+              <span class="numero-rojo">04</span>
+              <h2 class="titular-l">ESCULTURAS</h2>
+              <p class="texto">La calle en chico: medianeras, muros y alambrado.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 Piezas (clara): el proceso; cada pedazo que se suelta en la piedra es un paso (clase 10) · cemento -->
+      <section id="piezas">
+        <div class="textura textura-cemento textura-claro"></div>
+        <p class="micro numero-seccion">N° 05</p>
+
+        <!-- destino: el halo de la piedra completa (sketch.js la dibuja en líneas) -->
+        <div id="halo">
+          <span class="corte corte-si"></span>
+          <span class="corte corte-sd"></span>
+          <span class="corte corte-ii"></span>
+          <span class="corte corte-id"></span>
+        </div>
+
+        <!-- detalle: el título y el texto cambian según la pieza que se suelta -->
+        <div id="detalle-pieza">
+          <span class="numero-rojo">00</span>
+          <h2 class="titular-l">TÍTULO</h2>
+          <p class="texto-l">Acá iría el texto de este bloque.</p>
+        </div>
+
+        <!-- piezas arrastrables: el número del id coincide con la posición en los arrays y con data-info -->
+        <div class="pieza" id="bloque0" data-info="0"><span class="micro">N° 01</span></div>
+        <div class="pieza" id="bloque1" data-info="1"><span class="micro">N° 02</span></div>
+        <div class="pieza" id="bloque2" data-info="2"><span class="micro">N° 03</span></div>
+        <div class="pieza" id="bloque3" data-info="3"><span class="micro">N° 04</span></div>
+        <div class="pieza" id="bloque4" data-info="4"><span class="micro">N° 05</span></div>
+        <div class="pieza" id="bloque5" data-info="5"><span class="micro">N° 06</span></div>
+        <div class="pieza" id="bloque6" data-info="6"><span class="micro">N° 07</span></div>
+      </section>
+
+      <!-- 06 Contacto (clara): las piezas se juntan y la piedra va a la derecha · pared con grieta -->
+      <section id="contacto">
+        <div class="textura textura-grieta"></div>
+        <p class="micro numero-seccion">N° 06</p>
+        <div class="columna-izquierda">
+          <h2 class="titular-l">CONSULTAS</h2>
+          <p class="texto-l">Para preguntar por una pieza o hacer un pedido.</p>
+          <a class="boton micro" href="#">CONTACTO</a>
+        </div>
+        <!-- titular vertical en rojo, en el borde derecho -->
+        <p class="titular-vertical" aria-hidden="true">BRUTA</p>
+      </section>
+    </main>
+
+    <!-- Footer (oscuro): negro liso, logo en concreto y palabra grande cortada por la mitad -->
+    <footer>
+      <div class="footer-fila">
+        <img class="logo-concreto" src="assets/logos/bruta-logotipo-concreto.png" alt="BRUTA" width="280" />
+        <!-- datos de la cursada que pide la consigna, como ficha técnica -->
+        <dl class="ficha">
+          <dt>CARRERA</dt>
+          <dd>DISEÑO MULTIMEDIAL</dd>
+          <dt>MATERIA</dt>
+          <dd>DISEÑO Y PROGRAMACIÓN WEB I</dd>
+          <dt>TURNO</dt>
+          <dd>MAÑANA</dd>
+          <dt>COMISIÓN</dt>
+          <dd>DMM3AV</dd>
+          <dt>DOCENTE</dt>
+          <dd>OMAR TOYOS</dd>
+          <dt>FECHA</dt>
+          <dd>NOVIEMBRE 2026</dd>
+        </dl>
+      </div>
+      <!-- el contenedor muestra solo la mitad de arriba de la palabra -->
+      <div class="brutalismo-corte">
+        <p class="brutalismo">BRUTALISMO</p>
+      </div>
+    </footer>
+
+    <script src="sketch.js"></script>
+    <script src="cubos.js"></script>
+  </body>
+</html>

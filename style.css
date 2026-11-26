@@ -1,0 +1,1165 @@
+/* ===== Fuentes del sistema BRUTA (todas locales, en la carpeta fuentes/) ===== */
+/* Archivo: cada familia ya trae su ancho fijado (no hace falta font-stretch) */
+@font-face {
+  font-family: "Archivo Titular";
+  src: url("fuentes/ArchivoTitular-wght.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Archivo Subtitulo";
+  src: url("fuentes/ArchivoSubtitulo-wght.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Archivo Micro";
+  src: url("fuentes/ArchivoMicro-wght.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Archivo Texto";
+  src: url("fuentes/ArchivoTexto-wght.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+/* script de acento (licencia OFL en fuentes/MrDafoe-OFL.txt) */
+@font-face {
+  font-family: "Mr Dafoe";
+  src: url("fuentes/MrDafoe-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* resaltado tipo sello (versión de uso personal: sin números ni °, ·, ×, guion largo) */
+@font-face {
+  font-family: "Merchande Print Sans Rough";
+  src: url("fuentes/MerchandePrintSans-Rough-PERSONAL.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* ===== Variables (tokens del sistema BRUTA) ===== */
+:root {
+  /* Colores */
+  --gris-cemento: #cdcac3; /* franjas y fondos de producto */
+  --gris-cemento-claro: #e6e4df; /* fondo de página en la web */
+  --gris-cemento-oscuro: #3d3c39;
+  --negro: #111111;
+  --blanco: #f6f5f2;
+  --rojo-bruta: #d81920; /* único acento: poco y con intención */
+
+  /* Familias */
+  --fuente-titular: "Archivo Titular", "Arial Narrow", sans-serif;
+  --fuente-subtitulo: "Archivo Subtitulo", "Arial Narrow", sans-serif;
+  --fuente-micro: "Archivo Micro", Arial, sans-serif;
+  --fuente-texto: "Archivo Texto", Arial, sans-serif;
+  --fuente-script: "Mr Dafoe", cursive;
+  --fuente-resaltado: "Merchande Print Sans Rough", "Archivo Subtitulo", sans-serif;
+
+  /* Tamaños para web de escritorio (guía "Web y catálogo" del sistema) */
+  --titular-xxl: 160px;
+  --titular-xl: 110px; /* la guía no lo fija: queda entre xxl y l */
+  --titular-l: 72px;
+  --script-l: 64px;
+  --resaltado: 32px;
+  --subtitulo: 28px;
+  --texto-l: 20px;
+  --texto: 17px;
+  --micro: 12px;
+  --micro-s: 10px; /* textura gráfica, no lleva información */
+
+  /* Espaciado */
+  --esp-1: 8px;
+  --esp-2: 16px;
+  --esp-3: 24px;
+  --esp-4: 40px;
+  --esp-5: 64px;
+  --margen: 72px;
+
+  /* Trazos */
+  --trazo-fino: 1px;
+  --trazo-tecnico: 2px;
+
+  /* Opacidades de textura */
+  --opacidad-velo: 0.5;
+  --opacidad-reja: 0.35;
+
+  --alto-header: 72px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth; /* los botones del menú bajan con desplazamiento suave */
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--gris-cemento);
+  color: var(--negro);
+  font-family: var(--fuente-texto);
+  overflow-x: hidden; /* evita el scroll horizontal si la barra de scroll ocupa lugar */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* las texturas arrancan agrandadas (animación de aparición): se recorta lo que sobra a los costados
+   para que la página no se ensanche en celular. "clip" y no "hidden": hidden rompe el position: sticky */
+section {
+  overflow-x: clip;
+}
+
+/* foco de teclado: contorno de 3 px separado 2 px */
+a:focus-visible {
+  outline: 3px solid var(--negro);
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+/* ===== Estilos de texto del sistema ===== */
+.titular-xl {
+  font-family: var(--fuente-titular);
+  font-weight: 900;
+  font-size: var(--titular-xl);
+  line-height: 0.86;
+  letter-spacing: -0.01em;
+}
+
+.titular-l {
+  font-family: var(--fuente-titular);
+  font-weight: 800;
+  font-size: var(--titular-l);
+  line-height: 0.9;
+  letter-spacing: -0.005em;
+}
+
+.texto-l {
+  font-family: var(--fuente-texto);
+  font-weight: 500;
+  font-size: var(--texto-l);
+  line-height: 1.3;
+}
+
+.texto {
+  font-family: var(--fuente-texto);
+  font-weight: 400;
+  font-size: var(--texto);
+  line-height: 1.35;
+}
+
+.micro {
+  font-family: var(--fuente-micro);
+  font-weight: 500;
+  font-size: var(--micro);
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+}
+
+.micro-s {
+  font-family: var(--fuente-micro);
+  font-weight: 500;
+  font-size: var(--micro-s);
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+}
+
+/* script de acento: siempre cruzando un titular */
+.script {
+  font-family: var(--fuente-script);
+  font-weight: 400;
+  font-size: var(--script-l);
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--rojo-bruta);
+}
+
+/* resaltado tipo sello: una palabra o frase corta, sin números */
+.resaltado {
+  font-family: var(--fuente-resaltado);
+  font-weight: 400;
+  font-size: var(--resaltado);
+  line-height: 1;
+  letter-spacing: 0.03em;
+}
+
+/* ===== Header ===== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--alto-header);
+  z-index: 10; /* por encima de todo */
+  background-color: var(--negro);
+  color: var(--blanco);
+}
+
+header a:focus-visible {
+  outline-color: var(--blanco);
+}
+
+nav {
+  height: 100%;
+  padding: 0 var(--margen);
+}
+
+/* 5 columnas del mismo ancho con cada elemento centrado en la suya:
+   la distancia entre botones (y entre los botones y la B) es siempre la misma */
+.nav-lista {
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* la B suelta y el botón MENÚ solo se usan en celular.
+   "nav" adelante para que le gane a .boton, que más abajo pone display: inline-block */
+nav .logo-celular,
+nav .boton-menu {
+  display: none;
+}
+
+/* el botón MENÚ es un <button>: se le saca el estilo que trae el navegador */
+.boton-menu {
+  padding: 12px 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* isotipo (la B) en blanco: el mínimo es 32 px */
+.logo img {
+  display: block;
+  width: 40px;
+  height: auto;
+}
+
+/* ===== Canvas 1: piedra, fijo detrás de todo ===== */
+#lienzo-piedra {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none; /* deja pasar los clics a los botones que están encima */
+}
+
+#lienzo-piedra canvas {
+  display: block;
+}
+
+/* Las secciones van posicionadas pero SIN z-index:
+   así su contenido se dibuja encima de la piedra y su fondo (el ::before con z-index -1)
+   queda debajo de la piedra. */
+section {
+  position: relative;
+}
+
+/* color de fondo de cada sección: claras y oscuras intercaladas */
+#portada::before,
+#texto::before,
+#titulares::before,
+#horizontal::before,
+#piezas::before,
+#contacto::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+#portada::before,
+#titulares::before,
+#contacto::before {
+  background-color: var(--gris-cemento); /* claras */
+}
+
+#piezas::before {
+  background-color: var(--gris-cemento-claro); /* clara, fondo de producto */
+}
+
+#texto::before,
+#horizontal::before {
+  background-color: var(--negro); /* oscuras */
+}
+
+#texto,
+#horizontal {
+  color: var(--blanco);
+}
+
+/* ===== Texturas: aparecen al llegar a su sección y tienen los bordes difuminados ===== */
+.textura {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* debajo de la piedra, encima del color de la sección */
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  /* bordes difuminados: se ve entera en el centro y se desvanece hacia los bordes */
+  -webkit-mask-image: radial-gradient(ellipse 55% 55% at 50% 50%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 55% 55% at 50% 50%, #000 40%, transparent 100%);
+  /* estado inicial: invisible y un poco agrandada */
+  opacity: 0;
+  transform: scale(1.1);
+  transition: opacity 1.4s ease, transform 2s ease;
+}
+
+/* sketch.js le agrega la clase "visible" cuando la sección está en pantalla */
+.textura.visible {
+  opacity: var(--opacidad-textura, 1);
+  transform: scale(1);
+}
+
+/* fotos en luz suave sobre el gris de la sección */
+.textura-cemento,
+.textura-afiche,
+.textura-grieta {
+  background-color: var(--gris-cemento);
+  background-blend-mode: soft-light;
+}
+
+.textura-cemento {
+  background-image: url("assets/texturas/bruta-textura-cemento.jpg");
+}
+
+.textura-grieta {
+  background-image: url("assets/texturas/bruta-textura-pared-grieta.jpg");
+}
+
+/* en titulares la textura queda quieta en pantalla mientras pasan los cuatro titulares:
+   el contenedor ocupa toda la sección y la textura adentro es sticky */
+.capa-textura {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.textura-afiche {
+  background-image: url("assets/texturas/bruta-textura-afiche-trama.jpg");
+  position: sticky;
+  height: 100vh;
+}
+
+/* ===== Lenguaje técnico: numeración, marca de registro, micro texto y líneas ===== */
+.numero-seccion {
+  position: absolute;
+  top: calc(var(--alto-header) + var(--esp-4));
+  left: var(--margen);
+}
+
+/* marca de registro: cruz con círculo */
+.registro {
+  position: absolute;
+  top: calc(var(--alto-header) + var(--esp-4));
+  right: var(--margen);
+  width: 36px;
+  height: 36px;
+}
+
+.registro::before,
+.registro::after {
+  content: "";
+  position: absolute;
+  background-color: var(--negro);
+}
+
+.registro::before {
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: var(--trazo-tecnico);
+  transform: translateY(-50%);
+}
+
+.registro::after {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: var(--trazo-tecnico);
+  transform: translateX(-50%);
+}
+
+.registro i {
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  right: 9px;
+  bottom: 9px;
+  border: var(--trazo-tecnico) solid var(--negro);
+  border-radius: 50%;
+}
+
+/* micro texto girado 90° en el borde derecho (textura gráfica) */
+.texto-borde {
+  position: absolute;
+  top: 50%;
+  right: var(--esp-3);
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+}
+
+/* línea de construcción punteada */
+.linea-construccion {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  border-top: var(--trazo-fino) dashed currentColor;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.linea-construccion span {
+  position: absolute;
+  right: var(--margen);
+  bottom: var(--esp-1);
+}
+
+/* número de panel: rojo, siempre en tamaño grande (24 px o más) */
+.numero-rojo {
+  display: block;
+  font-family: var(--fuente-titular);
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--rojo-bruta);
+  margin-bottom: var(--esp-2);
+}
+
+/* ===== Botones: texto en mayúsculas entre corchetes, sin caja ===== */
+/* los corchetes los pone el CSS: cualquier enlace con la clase "boton" los lleva */
+.boton {
+  display: inline-block;
+  color: inherit; /* negro sobre fondos claros, blanco en el header y las secciones oscuras */
+  white-space: nowrap;
+}
+
+.boton::before {
+  content: "[";
+  margin-right: 0.25em;
+  transition: margin 0.2s ease, color 0.2s ease;
+}
+
+.boton::after {
+  content: "]";
+  margin-left: 0.25em;
+  transition: margin 0.2s ease, color 0.2s ease;
+}
+
+/* al pasar el mouse los corchetes se abren y se ponen rojos.
+   Solo en pantallas con mouse: en celular el toque deja el hover "pegado" */
+@media (hover: hover) {
+  .boton:hover::before {
+    margin-right: 0.6em;
+    color: var(--rojo-bruta);
+  }
+
+  .boton:hover::after {
+    margin-left: 0.6em;
+    color: var(--rojo-bruta);
+  }
+}
+
+/* ===== 01 Portada ===== */
+#portada {
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 var(--margen) var(--esp-5);
+}
+
+.portada-texto {
+  max-width: 420px;
+}
+
+/* la script cruza el titular */
+.portada-texto h1 {
+  position: relative;
+  margin-bottom: var(--esp-4);
+}
+
+.portada-texto .script {
+  position: absolute;
+  left: 45%;
+  bottom: -0.25em;
+  transform: rotate(-7deg);
+  white-space: nowrap;
+}
+
+.portada-botones {
+  display: flex;
+  gap: var(--esp-4);
+}
+
+/* los dos botones de la portada van en rojo (texto y corchetes) */
+.portada-botones .boton {
+  color: var(--rojo-bruta);
+}
+
+/* ===== 02 Texto (piedra a la izquierda, texto a la derecha) ===== */
+#texto {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 var(--margen);
+}
+
+.columna-derecha {
+  width: 45%;
+}
+
+/* pincelada roja a mano como subrayado del titular */
+.pincelada {
+  display: block;
+  width: 260px;
+  height: auto;
+  margin: var(--esp-2) 0 var(--esp-4) -12px;
+  pointer-events: none;
+}
+
+/* ===== 03 Titulares (los cuatro a la vista; crece el que corresponde al scroll) ===== */
+/* 1 pantalla de entrada + 4 de recorrido: cada pantalla de scroll activa el titular siguiente */
+#titulares {
+  height: 500vh;
+}
+
+/* la lista queda fija en pantalla mientras dura la sección */
+.titulares-fijo {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: var(--alto-header) var(--margen) 0;
+}
+
+.lista-titulares {
+  width: 45%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.titular {
+  display: flex;
+  align-items: center;
+  gap: var(--esp-3);
+  padding: var(--esp-2) 0;
+  border-top: var(--trazo-fino) solid var(--negro); /* filete entre titulares */
+}
+
+/* titular sin activar: chico y apagado */
+.titular .titular-l {
+  font-size: 36px;
+  opacity: 0.45;
+  transition: font-size 0.5s ease, opacity 0.5s ease;
+}
+
+/* el texto de apoyo solo se ve en el titular activo.
+   Es una frase entera: va a 20 px (el mínimo del sistema en pantalla) para que no ocupe tantas líneas */
+.titular .resaltado {
+  font-size: 20px;
+  line-height: 1.15;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease, margin 0.5s ease;
+}
+
+/* titular activo: crece a titular-l y muestra el texto de apoyo */
+.titular.activo .titular-l {
+  font-size: var(--titular-l);
+  opacity: 1;
+}
+
+.titular.activo .resaltado {
+  max-height: 7em; /* hasta seis líneas */
+  margin-top: var(--esp-2);
+  opacity: 1;
+}
+
+/* sello: el número sobre el círculo rojo pintado a mano.
+   Solo el activo muestra el círculo: un recurso de rojo por pantalla */
+.sello {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 54px;
+  transition: width 0.5s ease, height 0.5s ease;
+}
+
+.sello img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.sello-numero {
+  position: relative;
+  font-family: var(--fuente-titular);
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--negro);
+  transition: font-size 0.5s ease, color 0.5s ease;
+}
+
+.titular.activo .sello {
+  width: 96px;
+  height: 92px;
+}
+
+.titular.activo .sello img {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.titular.activo .sello-numero {
+  font-size: 40px;
+  color: var(--blanco);
+}
+
+/* ===== 04 Horizontal ===== */
+/* 4 paneles = 4 pantallas de alto: cada pantalla de scroll avanza un panel */
+#horizontal {
+  height: 400vh;
+}
+
+/* queda fijo arriba mientras dura la sección */
+#horizontal-interior {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  opacity: 0; /* aparece por opacidad (lo maneja cubos.js) */
+}
+
+#lienzo-cubos {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#lienzo-cubos canvas {
+  display: block;
+}
+
+/* fila de paneles: cubos.js la corre hacia el costado con transform */
+#pista {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400vw;
+  height: 100%;
+  display: flex;
+}
+
+.panel {
+  width: 100vw;
+  height: 100%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 var(--margen) var(--esp-5);
+}
+
+.panel .titular-l {
+  margin-bottom: var(--esp-3);
+}
+
+/* ===== 05 Piezas: arrastrar y soltar (clase 10) ===== */
+/* la sección es el contenedor: position relative, y las piezas van en absolute,
+   así position() toma como (0, 0) la esquina superior izquierda de la sección */
+#piezas {
+  height: 100vh;
+}
+
+/* cemento sobre gris claro (fondo de producto) */
+.textura-claro {
+  background-color: var(--gris-cemento-claro);
+}
+
+/* halo: mismo tamaño que la piedra (45 % del lado más corto de la ventana),
+   centrado en el espacio que deja el header. Se centra con left y top, sin transform,
+   porque position() lee la posición sin tener en cuenta los transform */
+#halo {
+  position: absolute;
+  width: 45vmin;
+  height: 45vmin;
+  left: calc(50% - 22.5vmin);
+  top: calc(50% + var(--alto-header) / 2 - 22.5vmin);
+}
+
+/* marcas de corte en las esquinas del halo */
+.corte {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 0 solid var(--negro);
+}
+
+.corte-si {
+  top: 0;
+  left: 0;
+  border-top-width: var(--trazo-tecnico);
+  border-left-width: var(--trazo-tecnico);
+}
+
+.corte-sd {
+  top: 0;
+  right: 0;
+  border-top-width: var(--trazo-tecnico);
+  border-right-width: var(--trazo-tecnico);
+}
+
+.corte-ii {
+  bottom: 0;
+  left: 0;
+  border-bottom-width: var(--trazo-tecnico);
+  border-left-width: var(--trazo-tecnico);
+}
+
+.corte-id {
+  bottom: 0;
+  right: 0;
+  border-bottom-width: var(--trazo-tecnico);
+  border-right-width: var(--trazo-tecnico);
+}
+
+/* detalle de la pieza, a la derecha */
+#detalle-pieza {
+  position: absolute;
+  right: var(--margen);
+  top: calc(50% + var(--alto-header) / 2);
+  transform: translateY(-50%);
+  width: calc(50% - 22.5vmin - var(--margen) - var(--esp-4));
+}
+
+#detalle-pieza .titular-l {
+  margin-bottom: var(--esp-3);
+  /* 72 px, o menos si no entra: "PRESENTACIÓN" mide unas 5,5 veces su tamaño de letra,
+     y el ancho del bloque es el mismo cálculo que su width */
+  font-size: min(var(--titular-l), calc((50vw - 22.5vmin - var(--margen) - var(--esp-4)) / 5.6));
+}
+
+/* piezas arrastrables: el tamaño y la posición los pone sketch.js */
+.pieza {
+  position: absolute;
+  z-index: 2; /* por encima del halo, para recibir el mouseReleased */
+  display: flex;
+  align-items: flex-end;
+  padding: var(--esp-1);
+  border: var(--trazo-fino) dashed rgba(17, 17, 17, 0.3);
+  cursor: move;
+  user-select: none; /* el texto no se selecciona al arrastrar */
+  touch-action: none; /* con el dedo, arrastra la pieza en lugar de mover la página */
+}
+
+.pieza:hover {
+  border-style: solid;
+  border-color: var(--negro);
+}
+
+/* ===== 06 Contacto (texto a la izquierda, piedra a la derecha) ===== */
+#contacto {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--margen);
+}
+
+.columna-izquierda {
+  width: 45%;
+}
+
+.columna-izquierda .titular-l {
+  margin-bottom: var(--esp-4);
+}
+
+.columna-izquierda .boton {
+  margin-top: var(--esp-4);
+}
+
+/* titular vertical (girado 90°, se lee de abajo hacia arriba) */
+.titular-vertical {
+  position: absolute;
+  top: 50%;
+  right: var(--margen);
+  transform: translateY(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  font-family: var(--fuente-titular);
+  font-weight: 900;
+  font-size: var(--titular-xxl);
+  line-height: 0.86;
+  letter-spacing: -0.01em;
+  color: var(--rojo-bruta);
+}
+
+/* ===== Footer (gris cemento oscuro, pintura negra, logo en concreto) ===== */
+footer {
+  position: relative;
+  z-index: 1; /* tapa a la piedra si se cruzan */
+  padding: var(--esp-5) var(--margen) 0;
+  background-color: var(--negro); /* mismo negro liso que la sección de texto */
+  color: var(--blanco);
+}
+
+.footer-fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--esp-5);
+}
+
+/* ficha técnica con los datos de la cursada (componente FichaTecnica del sistema) */
+.ficha {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  width: 420px;
+  margin: 0;
+  border-top: var(--trazo-tecnico) solid currentColor;
+}
+
+.ficha dt,
+.ficha dd {
+  margin: 0;
+  padding: var(--esp-1) 0;
+  border-bottom: var(--trazo-fino) solid currentColor;
+  font-family: var(--fuente-micro);
+  font-weight: 500;
+  font-size: var(--micro);
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+}
+
+.ficha dt {
+  padding-right: var(--esp-3);
+  opacity: 0.7;
+}
+
+.ficha dd {
+  text-align: right;
+}
+
+/* palabra final: titular gigante que ocupa todo el ancho entre los márgenes.
+   En Archivo Titular, "BRUTALISMO" mide unas 4,8 veces su tamaño de letra:
+   ancho disponible / 4,8 = tamaño de letra */
+.brutalismo {
+  font-family: var(--fuente-titular);
+  font-weight: 900;
+  font-size: calc((100vw - 2 * var(--margen)) / 4.8);
+  line-height: 0.8;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+/* corte: el contenedor mide la mitad del alto de las letras y oculta el resto,
+   así la palabra queda partida al pie de la página.
+   La máscara la difumina: arriba se ve a medias y hacia el corte desaparece */
+.brutalismo-corte {
+  margin-top: var(--esp-5);
+  /* la mitad de las mayúsculas de Archivo Titular cae a 0,39 em del borde de arriba */
+  height: calc((100vw - 2 * var(--margen)) / 4.8 * 0.39);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), transparent);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), transparent);
+}
+
+/* logotipo en concreto: mínimo 240 px de ancho */
+.logo-concreto {
+  display: block;
+  width: 280px;
+  height: auto;
+}
+
+footer a:focus-visible {
+  outline-color: var(--blanco);
+}
+
+/* =====================================================================
+   CELULAR (hasta 700 px de ancho)
+   Escala tipográfica de la guía web del sistema, columnas apiladas:
+   la piedra queda arriba y el texto abajo. sketch.js usa el mismo corte (700 px)
+   para ubicar la piedra y los casilleros de las piezas.
+   ===================================================================== */
+@media (max-width: 700px) {
+  :root {
+    --titular-xxl: 72px;
+    --titular-xl: 60px;
+    --titular-l: 40px;
+    --script-l: 40px;
+    --texto-l: 17px;
+    --texto: 16px;
+    --micro: 11px;
+    --esp-5: 40px;
+    --margen: 20px;
+    --alto-header: 56px;
+  }
+
+  /* ----- Header: la B a la izquierda, MENÚ a la derecha ----- */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo-celular {
+    display: block;
+  }
+
+  .logo-celular img {
+    width: 32px;
+  }
+
+  nav .boton-menu {
+    display: inline-block;
+  }
+
+  /* el menú es un panel negro a pantalla completa, oculto hasta que se toca MENÚ */
+  .nav-lista {
+    position: fixed;
+    top: var(--alto-header);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--alto-header));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--esp-4);
+    background-color: var(--negro);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  /* sketch.js le agrega la clase "abierto" al tocar MENÚ */
+  .nav-lista.abierto {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  /* dentro del panel la B sobra: ya está en la barra */
+  .nav-logo {
+    display: none;
+  }
+
+  /* enlaces del menú más grandes, fáciles de tocar */
+  .nav-lista .boton {
+    padding: 12px;
+    font-size: 18px;
+  }
+
+  /* ----- Técnico: numeración y marca de registro más cerca del header ----- */
+  .numero-seccion,
+  .registro {
+    top: calc(var(--alto-header) + var(--esp-3));
+  }
+
+  .texto-borde {
+    right: 4px;
+  }
+
+  /* ----- 01 Portada: título, texto y botones apilados abajo ----- */
+  #portada {
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: var(--esp-4);
+    padding-bottom: var(--esp-5);
+  }
+
+  .portada-texto {
+    max-width: 100%;
+  }
+
+  .portada-texto h1 {
+    margin-bottom: var(--esp-3);
+  }
+
+  /* ----- 02 Texto: la piedra arriba, el texto abajo ----- */
+  #texto {
+    align-items: flex-end;
+    padding-bottom: var(--esp-5);
+  }
+
+  .columna-derecha {
+    width: 100%;
+  }
+
+  .pincelada {
+    width: 200px;
+    margin: var(--esp-1) 0 var(--esp-3) -8px;
+  }
+
+  /* ----- 03 Titulares: la piedra abierta arriba, la lista abajo ----- */
+  .titulares-fijo {
+    align-items: flex-end;
+    padding-bottom: var(--esp-4);
+  }
+
+  .lista-titulares {
+    width: 100%;
+  }
+
+  .titular {
+    gap: var(--esp-2);
+    padding: var(--esp-1) 0;
+  }
+
+  .titular .titular-l {
+    font-size: 22px;
+  }
+
+  .titular.activo .titular-l {
+    font-size: var(--titular-l);
+  }
+
+  .titular .resaltado {
+    font-size: 17px;
+  }
+
+  .sello {
+    width: 36px;
+    height: 35px;
+  }
+
+  .sello-numero {
+    font-size: 16px;
+  }
+
+  .titular.activo .sello {
+    width: 64px;
+    height: 62px;
+  }
+
+  .titular.activo .sello-numero {
+    font-size: 28px;
+  }
+
+  /* ----- 04 Horizontal: los paneles ocupan el ancho del celular ----- */
+  .numero-rojo {
+    font-size: 32px;
+  }
+
+  /* ----- 05 Piezas: detalle arriba, halo en el medio, casilleros abajo ----- */
+  /* el halo pasa a 60vmin: sketch.js agranda la piedra en la misma proporción */
+  #halo {
+    width: 60vmin;
+    height: 60vmin;
+    left: calc(50% - 30vmin);
+    top: 34vh;
+  }
+
+  .corte {
+    width: 24px;
+    height: 24px;
+  }
+
+  #detalle-pieza {
+    top: calc(var(--alto-header) + var(--esp-5));
+    left: var(--margen);
+    right: var(--margen);
+    width: auto;
+    transform: none;
+  }
+
+  #detalle-pieza .numero-rojo {
+    margin-bottom: var(--esp-1);
+  }
+
+  #detalle-pieza .titular-l {
+    margin-bottom: var(--esp-1);
+    font-size: var(--titular-l); /* en celular el bloque ocupa todo el ancho: vuelve a 40 px */
+  }
+
+  .pieza {
+    padding: 4px;
+  }
+
+  .pieza .micro {
+    font-size: 9px;
+  }
+
+  /* ----- 06 Contacto: la piedra arriba, el texto abajo, BRUTA en vertical arriba a la derecha ----- */
+  #contacto {
+    align-items: flex-end;
+    padding-bottom: var(--esp-5);
+  }
+
+  .columna-izquierda {
+    width: 100%;
+  }
+
+  .titular-vertical {
+    top: calc(var(--alto-header) + var(--esp-4));
+    transform: rotate(180deg);
+  }
+
+  /* ----- Footer: logo arriba y ficha a todo el ancho ----- */
+  .footer-fila {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--esp-4);
+  }
+
+  .logo-concreto {
+    width: 240px;
+  }
+
+  .ficha {
+    width: 100%;
+  }
+}
